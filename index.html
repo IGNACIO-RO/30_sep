@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 de Septiembre - Día del Hot Wheels 🏎️🔥</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:ital,wght@0,300;0,500;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            user-select: none;
+        }
+
+        :root {
+            --fire-red: #ff2a2a;
+            --hot-orange: #ff6b00;
+            --gold-light: #ffe600;
+            --card-glass: rgba(18, 10, 24, 0.72);
+            --border-glow: rgba(255, 107, 0, 0.4);
+        }
+
+        body {
+            overflow-x: hidden;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, #2e0808 0%, #120512 50%, #050108 100%);
+            position: relative;
+            padding: 20px 0;
+        }
+
+        /* Ambient Speed Glow */
+        .ambient-glow {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.2) 0%, rgba(255, 42, 42, 0.08) 50%, transparent 75%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: pulseGlow 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+        }
+
+        /* Floating particles */
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            animation: floatUpParticle linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes floatUpParticle {
+            0% {
+                transform: translateY(105vh) rotate(0deg) scale(0.6);
+                opacity: 0;
+            }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .card-container {
+            position: relative;
+            z-index: 10;
+            padding: 20px;
+            width: 100%;
+            max-width: 490px;
+        }
+
+        .card {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 36px;
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.8),
+                0 0 35px rgba(255, 107, 0, 0.2),
+                0 0 0 1px rgba(255, 230, 0, 0.15) inset;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.85),
+                0 0 50px rgba(255, 107, 0, 0.35),
+                0 0 0 1px rgba(255, 230, 0, 0.3) inset;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 20px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(255, 42, 42, 0.2), rgba(255, 107, 0, 0.2));
+            color: var(--gold-light);
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(255, 230, 0, 0.3);
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
+        }
+
+        .car-wrapper {
+            position: relative;
+            width: 170px;
+            height: 100px;
+            margin: 0 auto 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .car-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 12px rgba(255, 107, 0, 0.6));
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .car-wrapper:hover .car-svg {
+            transform: scale(1.1) translateY(-3px);
+            filter: drop-shadow(0 0 20px rgba(255, 230, 0, 0.8));
+        }
+
+        .wheels {
+            transform-origin: center;
+            animation: spinWheels 1.5s linear infinite;
+        }
+
+        @keyframes spinWheels {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Speed trails under the car */
+        .speed-lines {
+            position: absolute;
+            bottom: 12px;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--hot-orange), var(--gold-light), transparent);
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--hot-orange);
+            animation: speedPulse 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes speedPulse {
+            0% { opacity: 0.4; transform: scaleX(0.8); }
+            100% { opacity: 1; transform: scaleX(1.1); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            font-size: 2.1rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 14px;
+            line-height: 1.25;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #ffe600 0%, #ff6b00 50%, #ff2a2a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.message {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 0.96rem;
+            line-height: 1.68;
+            font-weight: 300;
+            margin-bottom: 26px;
+        }
+
+        .btn-gold {
+            position: relative;
+            background: linear-gradient(135deg, #ffe600 0%, #ff6b00 50%, #ff2a2a 100%);
+            color: #120202;
+            border: none;
+            padding: 15px 36px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            box-shadow: 0 6px 22px rgba(255, 107, 0, 0.45);
+            transition: all 0.3s ease;
+            outline: none;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.7s;
+        }
+
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.65);
+            color: #000;
+        }
+
+        .btn-gold:active {
+            transform: translateY(0);
+        }
+
+        #secretPoem {
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(12px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 0;
+            overflow: hidden;
+            background: rgba(255, 107, 0, 0.08);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 230, 0, 0.25);
+        }
+
+        #secretPoem.visible {
+            opacity: 1;
+            max-height: 250px;
+            margin-top: 24px;
+            padding: 22px 20px;
+            transform: translateY(0);
+        }
+
+        #secretPoem p.poem-line {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #ffe600;
+            font-size: 0.98rem;
+            line-height: 1.6;
+            margin-bottom: 6px;
+        }
+
+        #secretPoem p.poem-author {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTENEDOR E IMAGEN OPTIMIZADA PARA MÓVILES --- */
+        #secretImageContainer {
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(15px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 0;
+            overflow: hidden;
+            border-radius: 22px;
+        }
+
+        #secretImageContainer.visible {
+            opacity: 1;
+            max-height: 500px; /* Tamaño amplio en desktop */
+            margin-top: 22px;
+            transform: translateY(0) scale(1);
+        }
+
+        #secretImageContainer img {
+            width: 100%;
+            height: 390px; /* Tamaño alto bien encuadrado */
+            object-fit: cover; /* Ajuste limpio */
+            object-position: center;
+            border-radius: 20px;
+            border: 1.5px solid rgba(255, 230, 0, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 107, 0, 0.3);
+            display: block;
+        }
+
+        /* --- ADAPTABILIDAD PARA PANTALLAS DE CELULARES --- */
+        @media (max-width: 480px) {
+            .card {
+                padding: 34px 20px;
+            }
+            h1 { font-size: 1.8rem; }
+            p.message { font-size: 0.9rem; }
+            
+            #secretImageContainer.visible {
+                max-height: 440px; /* Permitir espacio suficiente en cel */
+            }
+
+            #secretImageContainer img {
+                height: 380px; /* 👈 IMAGEN GRANDE Y CLARA EN CELULAR */
+                object-fit: contain; /* Garantiza que el carrito/gatito se vea completo sin recortes */
+                background: rgba(0, 0, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Audio oculto (Canción temática/romántica instrumental o de fondo) -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="aud/LOS KORYS no voy a llorar - (192 Kbps).mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<!-- Pantalla de Bienvenida para permitir reproducción con sonido -->
+<div id="overlay" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(12, 4, 15, 0.95);
+    backdrop-filter: blur(18px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.8s ease, visibility 0.8s;
+">
+    <div style="font-size: 65px; margin-bottom: 20px; filter: drop-shadow(0 0 20px #ff6b00); animation: pulse 1.8s infinite;">🏎️🔥</div>
+    <h2 style="font-size: 26px; color: #ffe600; font-family: 'Playfair Display', serif; margin-bottom: 12px; max-width: 380px;">30 de Septiembre — Día del Hot Wheels</h2>
+    <p style="color: rgba(255,255,255,0.82); margin-bottom: 30px; font-size: 15px; font-weight: 300;">Un detalle especial pensado únicamente para ti</p>
+    <button onclick="startExperience()" style="
+        background: linear-gradient(135deg, #ffe600, #ff6b00, #ff2a2a);
+        color: #100202;
+        border: none;
+        padding: 16px 36px;
+        font-size: 16px;
+        font-weight: 800;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(255, 107, 0, 0.5);
+        transition: transform 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    ">
+        🏎️ Arrancar el Motor ✨
+    </button>
+</div>
+
+<!-- Botón Flotante para Controlar la Música -->
+<button id="musicToggle" onclick="toggleMusic()" style="
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 100;
+    background: rgba(255, 107, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 230, 0, 0.5);
+    color: #ffe600;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+">🎵</button>
+
+    <div class="ambient-glow"></div>
+
+    <div class="card-container">
+        <div class="card">
+            <span class="badge"><i class="fa-solid => fa-fire"></i> 30 de Septiembre</span>
+
+            <!-- Cochecito Hot Wheels SVG Interactivo -->
+            <div class="flower-wrapper car-wrapper" onclick="triggerMagic()">
+                <div class="speed-lines"></div>
+                <svg class="car-svg" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sombra inferior -->
+                    <ellipse cx="80" cy="68" rx="65" ry="6" fill="#000000" opacity="0.6" />
+                    
+                    <!-- Chasis deportivo / Carrocería Hot Wheels -->
+                    <path d="M15 52 L30 35 Q45 22 75 22 L110 26 Q135 28 148 42 L152 52 Q155 58 145 58 L15 58 Z" fill="url(#carGradient)" />
+                    
+                    <!-- Techo y Parabrisas oscuro -->
+                    <path d="M48 35 L62 25 Q80 24 102 27 L115 35 Z" fill="#120518" opacity="0.95" />
+                    <path d="M65 26 L100 28 L110 35 L52 35 Z" fill="#00d4ff" opacity="0.4" />
+
+                    <!-- Detalles / Rayas de Carreras Amarillas/Doradas -->
+                    <path d="M25 50 Q70 42 145 44 L142 48 Q70 46 23 52 Z" fill="#ffe600" />
+                    <path d="M110 26 L125 40 L120 41 L107 27 Z" fill="#ff2a2a" />
+
+                    <!-- Alerón Trasero -->
+                    <path d="M18 36 L30 36 L26 42 L14 42 Z" fill="#ff2a2a" />
+                    <rect x="20" y="42" width="4" height="8" fill="#111" />
+
+                    <!-- Luces Delanteras y Traseras con Neón -->
+                    <path d="M148 46 Q153 48 148 52 Z" fill="#ffe600" filter="drop-shadow(0 0 6px #ffe600)" />
+                    <path d="M16 44 L14 48 L17 49 Z" fill="#ff2a2a" filter="drop-shadow(0 0 6px #ff2a2a)" />
+
+                    <!-- Rueda Trasera (Grande) -->
+                    <g transform="translate(42, 56)">
+                        <circle cx="0" cy="0" r="14" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+                        <circle cx="0" cy="0" r="8" fill="#d4af37" class="wheels"/>
+                        <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+                    </g>
+
+                    <!-- Rueda Delantera -->
+                    <g transform="translate(122, 56)">
+                        <circle cx="0" cy="0" r="12" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+                        <circle cx="0" cy="0" r="7" fill="#d4af37" class="wheels"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#ffffff"/>
+                    </g>
+
+                    <!-- Gradientes del auto -->
+                    <defs>
+                        <linearGradient id="carGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#ff2a2a" />
+                            <stop offset="50%" stop-color="#ff6b00" />
+                            <stop offset="100%" stop-color="#ffe600" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <h1><span>Dia del minito, minite o marimacho que le gustan los hot wheels :v</span></h1>
+
+            <p class="message">
+                Dicen que las flores son para ellas, pero hoy 30 de septiembre te toca a ti mi estimad@
+            </p>
+
+            <button class="btn-gold" onclick="triggerMagic()" id="mainBtn">
+                Descubrir Detalle ✨
+            </button>
+
+            <!-- Dedicatoria / Poema Romántico -->
+            <div id="secretPoem">
+                <p class="poem-line">A</p>
+                <p class="poem-line">la musica mas random para los tip@s mas random que conozco</p>
+            </div>
+            <!-- SECCIÓN DE IMAGEN DE ALTA RESOLUCIÓN Y ADAPTABLE -->
+            <div id="secretImageContainer">
+                <img src="img/WhatsApp Image 2026-09-21 at 8.57.45 AM.jpeg" alt="ramo :v">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const overlay = document.getElementById('overlay');
+        const musicBtn = document.getElementById('musicToggle');
+
+        function startExperience() {
+            audio.play().then(() => {
+                musicBtn.innerHTML = '🎵';
+            }).catch(error => {
+                console.log("Error al reproducir audio: ", error);
+            });
+
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.visibility = 'hidden';
+            }, 800);
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerHTML = '🎵';
+            } else {
+                audio.pause();
+                musicBtn.innerHTML = '🔇';
+            }
+        }
+
+        // Creación constante de partículas temáticas (Carritos, Llamas, Corazones)
+        function createParticle() {
+            const particle = document.createElement("div");
+            particle.classList.add("floating-element");
+
+            const icons = ["🏎️", "🔥", "✨", "🏆", "⚡"];
+            particle.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+
+            particle.style.left = Math.random() * 92 + 4 + "vw";
+            particle.style.fontSize = (Math.random() * 12 + 16) + "px";
+            particle.style.animationDuration = (Math.random() * 5 + 8) + "s";
+
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 13000);
+        }
+
+        setInterval(createParticle, 1200);
+
+        function triggerMagic() {
+            const poem = document.getElementById("secretPoem");
+            const imageContainer = document.getElementById("secretImageContainer");
+            const btn = document.getElementById("mainBtn");
+
+            poem.classList.add("visible");
+            imageContainer.classList.add("visible");
+            
+            btn.innerText = "DE MI PARTE PA TU PARTE CON CORIÑO 🏆";
+
+            speedExplosion();
+        }
+
+        // Lluvia especial de celebración al presionar el botón
+        function speedExplosion() {
+            const elements = ["🏎️", "🔥", "✨", "🏆", "⚡"];
+
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const el = document.createElement("div");
+                    el.classList.add("floating-element");
+
+                    el.innerHTML = elements[Math.floor(Math.random() * elements.length)];
+                    el.style.left = (Math.random() * 85 + 7) + "vw";
+                    el.style.fontSize = (Math.random() * 18 + 20) + "px";
+                    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+
+                    document.body.appendChild(el);
+
+                    setTimeout(() => {
+                        el.remove();
+                    }, 6000);
+                }, i * 80);
+            }
+        }
+    </script>
+</body>
+</html>
